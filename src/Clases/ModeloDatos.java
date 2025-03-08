@@ -4,6 +4,7 @@ import General.Medico;
 import empleado.EmpleadoEventual;
 import empleado.EmpleadoPorPlanilla;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -59,15 +60,6 @@ public class ModeloDatos {
         }
     }
 
-    public Paciente consultarPacientePorDocumento() {
-        Paciente paciente = pacientesMap.get(documento);
-        if (paciente != null) {
-            paciente.imprimirDatosPaciente();
-        } else {
-            System.out.println("Paciente no encontrado.");
-        }
-        return paciente;
-    }
 
     public Medico consultarMedicoPorNombre(String nombreMedico){
 
@@ -80,30 +72,58 @@ public class ModeloDatos {
 
     }
 
-    public void consultarEmpleadoPorPlanillaPorDocumento() {
-        EmpleadoPorPlanilla empleado = empleadosPlanillaMap.get(documento);
-        if (empleado != null) {
-            empleado.imprimirEmpleadoPorPlanilla();
+
+
+    public Paciente consultarPacientePorDocumento() {
+        String documentoPaciente = JOptionPane.showInputDialog("Ingrese el documento del empleado a consultar");
+        Paciente paciente = null;
+
+        if (pacientesMap.containsKey(documentoPaciente)) {
+            paciente = pacientesMap.get(documentoPaciente);
+
+            paciente.imprimirDatosPaciente();
         } else {
-            System.out.println("Empleado por planilla no encontrado.");
+            System.out.println("Empleado no encontrado.");
+        }
+        return paciente;
+    }
+
+    public void consultarEmpleadoPorPlanillaPorDocumento() {
+        String documentoEmpPlanilla = JOptionPane.showInputDialog("Ingrese el documento del empleado a consultar");
+        EmpleadoPorPlanilla empleadoPlanilla = null;
+
+        if (empleadosPlanillaMap.containsKey(documentoEmpPlanilla)) {
+            empleadoPlanilla = empleadosPlanillaMap.get(documentoEmpPlanilla);
+
+            empleadoPlanilla.imprimirEmpleadoPorPlanilla();
+        } else {
+            System.out.println("Empleado no encontrado.");
         }
     }
 
-    public void consultarEmpleadoEventualPorDocumento() {
-        EmpleadoEventual empleado = empleadosEventualMap.get(documento);
-        if (empleado != null) {
-            empleado.imprimirEmpleadoEventual();
-        } else {
-            System.out.println("Empleado eventual no encontrado.");
-        }
+   public void consultarEmpleadoEventualPorDocumento() {
+       String documentoEmpEventual = JOptionPane.showInputDialog("Ingrese el documento del empleado a consultar");
+       EmpleadoEventual empleadoEventual = null;
+
+       if (empleadosEventualMap.containsKey(documentoEmpEventual)) {
+           empleadoEventual = empleadosEventualMap.get(documentoEmpEventual);
+
+           empleadoEventual.imprimirEmpleadoEventual();
+       } else {
+           System.out.println("Empleado no encontrado.");
+       }
     }
 
     public void consultarMedicoPorDocumento() {
-        Medico medico = medicosMap.get(documento);
-        if (medico != null) {
+        String documentoMedico = JOptionPane.showInputDialog("Ingrese el documento del empleado a consultar");
+        Medico medico = null;
+
+        if (medicosMap.containsKey(documentoMedico)) {
+            medico = medicosMap.get(documentoMedico);
+
             medico.imprimirMedico();
         } else {
-            System.out.println("Médico no encontrado.");
+            System.out.println("Empleado no encontrado.");
         }
     }
 
